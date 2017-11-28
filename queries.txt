@@ -1,0 +1,58 @@
+drop table import_company_details;
+drop table export_company_details;
+drop table payment_details;
+drop table import_item_details;
+drop table export_item_details;
+
+
+create table import_company_details if not exists(	
+	company_id		int,
+	company_address		varchar(50),
+	company_emailid		varchar(20),
+	company_name	        varchar(30),
+	constraint	        import_company_id_pk		primary key(company_id)
+);
+create table export_company_details if not exists(	
+	company1_id		int,
+	company_address		varchar(50),
+	company_emailid		varchar(20),
+	company_name	        varchar(30),
+	constraint	        import_company_id_pk		primary key(company_id)
+);
+
+
+
+create table payment_details if not exists(
+	company_id	int,
+	pay_id		int,
+	pay_type	varchar(20),
+        pay_amount      int
+	constraint	table_payment_details_company_id_fk	foreign key(company_id)	references  customers(company_id) 
+);
+
+
+create table import_item_details if not exists(
+	company_id		int,
+        company1_id             int,
+	item_name		varchar(20),
+	import_id		int,
+	quantity	        int,
+	date		        date,
+	address		        varchar(50)
+	constraint	        table_import_details_user_id_fk		foreign key(company_id)	references  customers(company_id) 
+);
+
+
+create table export_item_details if not existss(
+	company1_id		int,
+        company_id              int,
+	item_name		varchar(20),
+	export_id		int,
+	quantity	        int,
+	address		        varchar(50),
+	date		        date,
+	constraint	        table_export_user_id_fk		foreign key(company1_id)	references  customers(company1_id) 
+);
+
+
+	
